@@ -1,4 +1,4 @@
-#Fichero `mvc/public/index.php`
 <?php
-echo 'Contenido en public<br>';
+//#Fichero `mvc/public/index.php`
+//echo 'Contenido en public<br>';
 require "../start.php";
