@@ -1,7 +1,10 @@
 <?php
-require_once "Controller.php";
 
-$app = new Controller();
+require "../core/App.php";
+$app = new App();
+return;
+
+/*$app = new Controller();
 
 if(isset($_GET['method'])) {
     $method = $_GET['method'];
@@ -20,4 +23,4 @@ try {
 } catch (\Throwable $th) {
     http_response_code(404);
     echo $th->message;
-}
+}*/
