@@ -8,14 +8,21 @@
 <body>
 <h1>Lista de usuarios</h1>    
 <table border="solid">
-    <?php foreach($users as $user) {?>
+    <thead>
         <tr>
-        <td><?php  $user[0] ?></td>
-        <td><?php echo $user[1] ?></td>
-        <td><a href="?method=show&id=<?php echo $user[0] ?>">Ver</a></td>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($productTypes as $product) {?>
+        <tr>
+        <td><?= $product->id ?></td>
+        <td><?= $product->name ?></td>
         </tr>
     <?php } 
 ?>
+    </tbody>
 </table>
 </body>
 </html>

@@ -8,14 +8,25 @@
 <body>
 <h1>Lista de usuarios</h1>    
 <table border="solid">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>F.Nacimiento</th>
+        </tr>
+    </thead>
+    <tbody>
     <?php foreach($users as $user) {?>
         <tr>
-        <td><?php  $user[0] ?></td>
-        <td><?php echo $user[1] ?></td>
-        <td><a href="?method=show&id=<?php echo $user[0] ?>">Ver</a></td>
+        <td><?= $user->name ?></td>
+        <td><?= $user->surname ?></td>
+        <td><?=  $user->email ?></td>
+        <td><?= $user->birthdate?></td>
         </tr>
     <?php } 
 ?>
+    </tbody>
 </table>
 </body>
 </html>

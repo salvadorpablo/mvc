@@ -1,4 +1,5 @@
 <?php
+namespace Core;
 class App
 {
     function __construct()
@@ -28,7 +29,7 @@ class App
         }
 
 
-        $file = "../app/controllers/$controllerName" . ".php";
+        $file = "../app/controllers/$controllerName" . ".php"; //importo un nuevo namespace
         if (file_exists($file)) {
             require_once $file;
         } else {
@@ -37,7 +38,9 @@ class App
             die();
         }
 
-        $controllerObject = new $controllerName;
+        $controllerName = "\App\Controllers\\$controllerName";
+        
+        $controllerObject = new $controllerName; //creo el namespace aqui
         if (method_exists($controllerName, $method)) {
             $controllerObject->$method($arguments);
         } else {
