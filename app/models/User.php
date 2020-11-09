@@ -4,22 +4,31 @@ namespace App\Models;
 use PDO;
 use PDOException;
 
-class User 
+class User
 {
-    public function __construct(){
-
+    public function __construct()
+    {
+        # code...
     }
 
-    public static function all(){ //static porque está asociado a la clase
-
-        $db= User::db(); //obtengo el objeto de la base de datos
-
+    public static function all()
+    {
+        $db = User::db();
         $statement = $db->query('SELECT * FROM users');
         $users = $statement->fetchAll(PDO::FETCH_CLASS, User::class);
-        
-        return $users;
 
-        //return "todos los registros";
+        return $users;        
+    }
+
+    public static function find($id)
+    {
+        $db = User::db();
+
+        $statement = $db->prepare('SELECT * FROM users WHERE id=:id');
+        $statement->execute(array(':id' => $id));        
+        $statement->setFetchMode(PDO::FETCH_CLASS, User::class);
+        $user = $statement->fetch(PDO::FETCH_CLASS);
+        return $user;
     }
 
     protected static function db()

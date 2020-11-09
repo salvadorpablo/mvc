@@ -6,7 +6,7 @@
     <title>Ejercicio 00</title>
 </head>
 <body>
-<h1>Lista de usuarios</h1>    
+<h1>Lista de productos</h1>    
 <table border="solid">
     <thead>
         <tr>
@@ -19,6 +19,7 @@
         <tr>
         <td><?= $product->id ?></td>
         <td><?= $product->name ?></td>
+        <td><a href="/product/show/<?= $product->id ?>">  Ver </a></td>
         </tr>
     <?php } 
 ?>

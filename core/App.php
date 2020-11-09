@@ -1,10 +1,11 @@
 <?php
 namespace Core;
+
 class App
 {
-    function __construct()
+    public function __construct()
     {
-        // echo "construyo App"<br>;
+        // echo "construyo App<br>";
 
         if (isset($_GET['url'])) {
             $url = $_GET['url'];
@@ -12,35 +13,39 @@ class App
             $url = 'home';
         }
 
-        //descomponer (explode) mete cada uno de los fragmentos entre / y / en un array
-        //trim() es para que, si hay 2 barras //, no lo tenga en cuenta
-        $arguments = explode('/', trim($url, '/'));
-
-        $controllerName = array_shift($arguments);
-
-        //uc (UPPER CASE) pero solamente la primera letra de cada palabra (words)
+        $arguments = explode('/', trim($url, '/')); 
+        // echo $url;
+        // echo "<hr>";       
         
-        $controllerName = ucwords($controllerName) . "Controller";
+        
+        // print_r($arguments);
+        // echo "<hr>";
+        $controllerName = array_shift($arguments);
+        // print_r($arguments);
+        // echo "<hr>";
+        $controllerName = ucwords($controllerName) . "Controller";        
 
         if (count($arguments)) {
             $method =  array_shift($arguments);
+            // print_r($arguments);
+            // echo "<hr>";
+    
         } else {
             $method = "index";
         }
 
-
-        $file = "../app/controllers/$controllerName" . ".php"; //importo un nuevo namespace
+        $file = "../app/controllers/$controllerName" . ".php";
         if (file_exists($file)) {
             require_once $file;
         } else {
             header("HTTP/1.0 404 Not Found");
             echo "No encontrado";
             die();
-        }
-
-        $controllerName = "\App\Controllers\\$controllerName";
+        }    
         
-        $controllerObject = new $controllerName; //creo el namespace aqui
+        $controllerName = "\App\Controllers\\$controllerName";
+
+        $controllerObject = new $controllerName;
         if (method_exists($controllerName, $method)) {
             $controllerObject->$method($arguments);
         } else {
@@ -48,5 +53,13 @@ class App
             echo "No encontrado";
             die();
         }
+        
+        
+        // echo $url . "<br>";
+        // echo $controllerName . "<br>";
+        // echo $method . "<br>";
+        // echo "<pre>";
+        // var_dump($arguments);
+
     }
 }

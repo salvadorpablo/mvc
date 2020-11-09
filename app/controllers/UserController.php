@@ -2,35 +2,40 @@
 namespace App\Controllers;
 
 require_once('../app/models/User.php');
-use \App\Models\User; //para poder utilizar $users = \App\Models\User::all()
-class UserController
-{
+use \App\Models\User;
 
+class UserController  
+{
     public function __construct()
     {
-        //echo "en UserController<br>";
+        // echo "en UserController<br>";
     }
 
-    public function index(){
-        //echo "En método index<br>";
+    public function index()
+    {
+        // echo "En método index<br>";
 
         //buscar la lista de usuarios
-        // User::all(); no encontrará la clase porque busca en app/models (si no hemos puesto use \App\Models\User; arriba)
-
-        //$users = \App\Models\User::all();
-        
-
-        $users = User::all();
-
+        $users = User::all(); //arriba pongo use ...
+        // $users = \App\Models\User::all();
         // echo "<pre>";
         // print_r($users);
-
         //generar la vista
         include('../views/user/index.php');
     }
-
-    public function show($arguments){
-        echo "En método show<br>";
-        var_dump($arguments);
+    
+    public function show($arguments)
+    {
+        $id = $arguments[0];
+        echo "Mostrar el usuario $id";        
+        $user = User::find($id);
+        //generar la vista
+        include('../views/user/show.php');
+    }
+    
+    public function delete($arguments)
+    {
+        $id = $arguments[0];
+        echo "Borrar el usuario $id";        
     }
 }
